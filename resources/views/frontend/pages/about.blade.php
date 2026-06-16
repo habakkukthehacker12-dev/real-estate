@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', 'À Propos — EstateVista')
+@section('title', 'À Propos | EstateVista')
 
 @push('styles')
 <style>

@@ -4,5 +4,5 @@ use App\Providers\AppServiceProvider;
 
 return [
     AppServiceProvider::class,
-    // App\Providers\HashServiceProvider::class
+    App\Providers\FortifyServiceProvider::class,
 ];

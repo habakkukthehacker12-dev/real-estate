@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
@@ -15,13 +16,30 @@ class VerifyEmailController extends Controller
     public function __invoke(EmailVerificationRequest $request): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(route('admin.dashboard', absolute: false).'?verified=1');
+            return $this->redirectAfterVerification($request->user());
         }
 
         if ($request->user()->markEmailAsVerified()) {
             event(new Verified($request->user()));
         }
 
-        return redirect()->intended(route('admin.dashboard', absolute: false).'?verified=1');
+        return $this->redirectAfterVerification($request->user());
+    }
+
+    private function redirectAfterVerification(User $user): RedirectResponse
+    {
+        $role = $user->role instanceof \BackedEnum
+                ? $user->role->value
+                : $user->role;
+
+        // Agent ou Admin → dashboard
+        if (in_array($role, ['agent', 'admin'])) {
+            return redirect()->route('admin.dashboard')
+                ->with('success', 'Email vérifié ! Bienvenue sur votre dashboard.');
+        }
+
+        // Buyer → accueil
+        return redirect()->route('home')
+            ->with('success', 'Email vérifié ! Bienvenue sur EstateVista.');
     }
 }

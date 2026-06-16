@@ -1,8 +1,9 @@
-use Illuminate\Support\Str;
 @extends('base')
 
-@section('title', 'Mes Favoris — EstateVista')
-
+@section('title', 'Mes Favoris | EstateVista')
+@php
+use Illuminate\Support\Str;
+@endphp
 @push('styles')
 <style>
 /* ── Page Header ── */
@@ -767,8 +768,8 @@ use Illuminate\Support\Str;
             <div class="col-xl-3 col-lg-4 col-md-6 prop-card-wrap" id="card-{{ $property->id }}">
                 <div class="prop-card">
                     <div class="prop-img-wrap">
-                        <img src="{{ $property->cover_image ?? ($property->images->first()?->image_path ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}"
-                            alt="{{ $property->address }}" loading="lazy">
+                        <img src="/storage/{{ $property->cover_image ?? ($property->images->first()?->image_path ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}"
+                            alt="{{ $property->title }}" loading="lazy">
 
                         {{-- Status badge --}}
                         @php
@@ -807,7 +808,7 @@ use Illuminate\Support\Str;
                             <small>/mois</small>
                             @endif
                         </div>
-                        <div class="prop-title">{{ Str::limit($property->address, 40) }}</div>
+                        <div class="prop-title">{{ Str::limit($property->description, 40) }}</div>
                         <div class="prop-location">
                             <i class="bi bi-geo-alt-fill"></i>
                             {{ $property->city }}@if($property->country), {{ $property->country }}@endif
@@ -831,7 +832,7 @@ use Illuminate\Support\Str;
                             @endif
                         </div>
 
-                        <a href="{{ route('properties.show', $property->slug ?? $property->id) }}" class="btn-visit">
+                        <a href="{{ route('properties.show', $property->id) }}" class="btn-visit">
                             <i class="bi bi-eye"></i> Voir la propriété
                         </a>
                     </div>
@@ -871,7 +872,7 @@ use Illuminate\Support\Str;
             <div class="fav-cta-icon"><i class="bi bi-search-heart"></i></div>
             <div class="flex-grow-1">
                 <div class="fav-cta-title">Découvrir d'autres propriétés</div>
-                <div class="fav-cta-sub">Des nouveaux biens sont ajoutés chaque semaine — ne ratez rien.</div>
+                <div class="fav-cta-sub">Des nouveaux biens sont ajoutés chaque semaine ne ratez rien.</div>
             </div>
             <a href="{{ route('properties.index') }}" class="btn-cta-action">
                 <i class="bi bi-grid"></i> Voir tous les biens

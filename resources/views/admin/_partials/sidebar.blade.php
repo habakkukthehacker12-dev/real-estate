@@ -25,7 +25,7 @@ $agent = Agent::where('user_id', $user->id)->first();
     <div class="offcanvas-body p-0">
         <nav class="sidebar-nav">
             <a href="{{ route('admin.dashboard') }}"
-                class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+                class="sidebar-link {{ request()->routeIs('admin.dashboard.*') ? 'active' : '' }}">
                 <i class="bi bi-grid"></i>
                 Dashboard
             </a>

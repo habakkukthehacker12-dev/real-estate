@@ -71,6 +71,10 @@ return [
     | authentication or password reset when the operations are successful
     | and the user is authenticated. You are free to change this value.
     |
+
+    Vous pouvez ici configurer l'URL vers laquelle les utilisateurs seront redirigés lors de
+    | l'authentification ou de la réinitialisation du mot de passe, une fois ces opérations effectuées avec succès
+    | et l'utilisateur authentifié. Vous pouvez modifier cette valeur à votre guise.
     */
 
     'home' => '/dashboard',

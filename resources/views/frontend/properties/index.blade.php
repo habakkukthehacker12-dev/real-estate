@@ -4,7 +4,7 @@ use Illuminate\Support\Str;
 @endphp
 @extends('base')
 
-@section('title', 'Propriétés - EstateVista')
+@section('title', 'Propriétés | EstateVista')
 
 @push('styles')
 <style>
@@ -1108,12 +1108,12 @@ use Illuminate\Support\Str;
                 <div class="props-grid" id="propsGrid">
                     @forelse($properties as $property)
                     <div class="prop-card-item">
-                        <a href="{{ route('properties.show', $property->slug ?? $property->id) }}"
+                        <a href="{{ route('properties.show', $property->id) }}"
                             class="text-decoration-none d-block h-100">
                             <div class="prop-card">
                                 <div class="prop-img-wrap">
-                                    <img src="{{ $property->cover_image ?? ($property->images->first()?->image_path ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}"
-                                        alt="{{ $property->address }}" loading="lazy">
+                                    <img src="/storage/{{ $property->cover_image ?? ($property->images->first()?->image_path ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}"
+                                        alt="{{ $property->title }}" loading="lazy">
 
                                     {{-- Status badge --}}
                                     @php
@@ -1153,7 +1153,7 @@ use Illuminate\Support\Str;
                                             <small>/mois</small>
                                             @endif
                                         </div>
-                                        <div class="prop-title">{{ Str::limit($property->address, 40) }}</div>
+                                        <div class="prop-title">{{ Str::limit($property->title, 40) }}</div>
                                         <div class="prop-location">
                                             <i class="bi bi-geo-alt-fill"></i>
                                             {{ $property->city }}@if($property->country), {{ $property->country }}@endif

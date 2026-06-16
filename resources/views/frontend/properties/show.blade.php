@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('title', $property->address . ' – EstateVista')
+@section('title', $property->title . ' | EstateVista')
 @php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -538,7 +538,7 @@ use Illuminate\Support\Str;
                     </a>
                 </li>
                 <li class="breadcrumb-item active text-truncate" style="max-width:280px;color:var(--text-muted)">
-                    {{ Str::limit($property->address, 45) }}
+                    {{ Str::limit($property->description, 45) }}
                 </li>
             </ol>
         </nav>
@@ -599,7 +599,7 @@ use Illuminate\Support\Str;
                     @endif
 
                     @elseif($property->cover_image)
-                    <img src="{{ asset('storage/'.$property->cover_image) }}" alt="{{ $property->address }}"
+                    <img src="{{ asset('storage/'.$property->cover_image) }}" alt="{{ $property->title }}"
                         style="width:100%;height:520px;object-fit:cover;">
                     @else
                     <div class="d-flex align-items-center justify-content-center"
@@ -629,7 +629,7 @@ use Illuminate\Support\Str;
                     </div>
 
                     <h1 class="fw-800 mb-1" style="font-size:1.65rem;color:var(--text-main);line-height:1.25">
-                        {{ $property->address }}
+                        {{ $property->title }}
                     </h1>
                     <p class="mb-0" style="color:var(--text-muted);font-size:.95rem">
                         <i class="bi bi-geo-alt me-1" style="color:var(--primary)"></i>

@@ -57,47 +57,42 @@ class RegisteredUserController extends Controller
         return redirect()->route('home.index')->with('success', 'Bienvenue ! Votre compte a été créé.');
     }
 
-    public function registerAsAgent(Request $request)
+    public function registerAsAgent(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'phone' => 'required|string|max:20',
-            'agency_name' => 'required|string|max:255',
+            'name'           => 'required|string|max:255',
+            'last_name'      => 'required|string|max:255',
+            'email'          => 'required|string|email|max:255|unique:users',
+            'password'       => 'required|string|min:8|confirmed',
+            'phone'          => 'required|string|max:20',
+            'agency_name'    => 'required|string|max:255',
             'license_number' => 'required|string|max:50|unique:agents',
         ]);
 
-        // Créer l'utilisateur
         $user = User::create([
-            'name' => $validated['name'],
+            'name'      => $validated['name'],
             'last_name' => $validated['last_name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-            'phone' => $validated['phone'],
-            'role' => 'agent', // Rôle agent
+            'email'     => $validated['email'],
+            'password'  => Hash::make($validated['password']),
+            'phone'     => $validated['phone'],
+            'role'      => 'agent',
         ]);
 
-        // Créer le profil agent
         Agent::create([
-            'user_id' => $user->id,
-            'agency_name' => $validated['agency_name'],
-            'license_number' => $validated['license_number'],
-            'commission_rate' => 5.00, // Taux par défaut
-            'is_active' => false, //  En attente de validation admin
-            'bio' => null,
+            'user_id'         => $user->id,
+            'agency_name'     => $validated['agency_name'],
+            'license_number'  => $validated['license_number'],
+            'commission_rate' => 5.00,
+            'is_active'       => false,
         ]);
 
-        // Envoyer email de vérification
+        // Déclenche l'envoi de l'email de vérification
         event(new Registered($user));
 
-        // Connexion automatique
         Auth::login($user);
 
-        // Redirection vers le dashboard agent avec message
-        return redirect()
-            ->route('admin.dashboard')
-            ->with('warning', 'Votre compte agent est en attente de validation. Veuillez vérifier votre email.');
+        // Rediriger vers la page de vérification, PAS le dashboard
+        return redirect()->route('verification.notice')
+            ->with('warning', 'Vérifiez votre email pour accéder à votre dashboard agent.');
     }
 }

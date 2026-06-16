@@ -1060,7 +1060,7 @@ use Illuminate\Support\Str;
                                         : ($property->images->first()
                                             ? asset('storage/'.$property->images->first()->image_path)
                                             : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=400&q=80')
-                                        }}" alt="{{ $property->address }}" loading="lazy">
+                                        }}" alt="{{ $property->title }}" loading="lazy">
                                     @php
                                     $bmap = ['for_sale'=>['badge-sale','À vendre'],'for_rent'=>['badge-rent','À
                                     louer'],'sold'=>['badge-sold','Vendu'],'rented'=>['badge-rented','Loué']];
@@ -1070,7 +1070,7 @@ use Illuminate\Support\Str;
                                 </div>
                                 <div class="prop-mini-body">
                                     <div class="prop-mini-price">${{ number_format($property->price) }}</div>
-                                    <div class="prop-mini-title">{{ Str::limit($property->address, 36) }}</div>
+                                    <div class="prop-mini-title">{{ Str::limit($property->title, 36) }}</div>
                                     <div class="prop-mini-loc">
                                         <i class="bi bi-geo-alt-fill"></i>{{ $property->city }}
                                     </div>

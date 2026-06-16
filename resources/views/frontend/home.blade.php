@@ -2,9 +2,9 @@
 @php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-Auth::loginUsingId(3);
+// Auth::loginUsingId(1);
 @endphp
-@section('title', 'EstateVista - Propriétés d\'Exception')
+@section('title', 'EstateVista | Propriétés d\'Exception')
 
 @push('styles')
 <style>
@@ -1036,7 +1036,7 @@ select.sf-input {
                         Trouvez la Propriété <span>de Vos Rêves</span>
                     </h1>
                     <p class="hero-subtitle">
-                        Des milliers de biens d'exception vous attendent. Appartements, villas, terrains —
+                        Des milliers de biens d'exception vous attendent. Appartements, villas, terrain,
                         nous vous accompagnons à chaque étape de votre projet.
                     </p>
                     <div class="d-flex gap-3 flex-wrap">
@@ -1253,7 +1253,7 @@ select.sf-input {
                     <a href="{{ route('properties.show', $property->id) }}" class="text-decoration-none d-block h-100">
                         <div class="prop-card">
                             <div class="prop-img-wrap">
-                                <img src="{{ $property->cover_image ?? ($property->images->first()->image_path ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}"
+                                <img src="/storage/{{ $property->cover_image ?? ($property->images->first()->image_path ?? 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80') }}"
                                     alt="{{ $property->address }}" loading="lazy">
                                 <span class="prop-status-badge badge-featured">
                                     <i class="bi bi-star-fill me-1"></i>Vedette
@@ -1405,8 +1405,8 @@ select.sf-input {
                 <a href="{{ route('properties.show', $property->id) }}" class="text-decoration-none d-block h-100">
                     <div class="sold-card">
                         <div class="prop-img-wrap" style="height:210px">
-                            <img src="{{ $property->cover_image ?? ($property->images->first()->image_path ?? 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80') }}"
-                                alt="{{ $property->address }}" loading="lazy"
+                            <img src="/storage/{{ $property->cover_image ?? ($property->images->first()->image_path ?? 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=600&q=80') }}"
+                                alt="{{ $property->title }}" loading="lazy"
                                 style="width:100%;height:100%;object-fit:cover">
                         </div>
                         <div class="sold-overlay"></div>
@@ -1414,7 +1414,7 @@ select.sf-input {
                             <span class="sold-label mb-2"><i class="bi bi-check-lg me-1"></i>Vendu</span>
                             <div class="prop-price mt-2">${{ number_format($property->price) }}</div>
                             <div class="prop-title" style="color:rgba(255,255,255,.88)">
-                                {{ Str::limit($property->address, 32) }}</div>
+                                {{ Str::limit($property->title, 32) }}</div>
                             <div class="prop-location" style="color:rgba(255,255,255,.55);margin-bottom:0">
                                 <i class="bi bi-geo-alt"></i>{{ $property->city }}
                             </div>
@@ -1521,7 +1521,7 @@ select.sf-input {
                         <img src="https://i.pravatar.cc/100?img=1" alt="Sarah Martin" class="testi-avatar">
                         <div>
                             <div class="testi-name">Sarah Martin</div>
-                            <div class="testi-role">Acheteuse • Paris</div>
+                            <div class="testi-role">Acheteuse | Paris</div>
                         </div>
                     </div>
                 </div>
