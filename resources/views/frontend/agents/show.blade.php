@@ -2,7 +2,7 @@
 @php
 use Illuminate\Support\Str;
 @endphp
-@section('title', $agent->user->name . ' ' . $agent->user->last_name . ' — Agent EstateVista')
+@section('title', $agent->user->name . ' ' . $agent->user->last_name . ' | Agent EstateVista')
 
 @push('styles')
 <style>

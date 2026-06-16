@@ -84,7 +84,7 @@ class PropertyRequest extends FormRequest
             'cover_image' => ['nullable', 'file', 'image', 'max:4048', 'mimes:jpeg,png,jpg,gif,svg,webp'],
             'cover_image.*' => ['prohibited'],
             'images'   => ['nullable', 'array'],
-            'images.*' => ['image', 'max:2048'],
+            'images.*' => ['image', 'max:9048'],
             'amenities' => ['nullable', 'array'],
             'amenities.*' => ['exists:amenities,id'],
 

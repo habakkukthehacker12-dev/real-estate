@@ -17,7 +17,7 @@
 .about-hero-bg {
     position: absolute;
     inset: 0;
-    background: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=85') center/cover no-repeat;
+    background: url('{{ asset('asset/img/about-bg.jpeg') }}') center/cover no-repeat;
     opacity: .18;
     transform: scale(1.05);
     animation: slowZoom 18s ease-in-out infinite alternate;
@@ -679,12 +679,10 @@
                         <div class="story-badge-lbl">ans d'expérience</div>
                     </div>
                     <div class="story-img-main">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=85"
-                            alt="Notre bureau">
+                        <img src="{{ asset('asset/img/about-notre-bureau.jpeg') }}" alt="Notre bureau">
                     </div>
                     <div class="story-img-accent">
-                        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&q=80"
-                            alt="Notre équipe">
+                        <img src="{{ asset('asset/img/about-notre-equipe.jpeg') }}" alt="Notre équipe">
                     </div>
                 </div>
             </div>

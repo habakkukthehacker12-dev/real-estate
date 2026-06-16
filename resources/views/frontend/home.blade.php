@@ -2,7 +2,7 @@
 @php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-// Auth::loginUsingId(1);
+Auth::loginUsingId(1); // Simulate login for demo purposes, remove in production
 @endphp
 @section('title', 'EstateVista | Propriétés d\'Exception')
 
@@ -38,7 +38,7 @@ use Illuminate\Support\Str;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=2000&q=90') center/cover no-repeat;
+    background: url('{{ asset('asset/img/home-bg.jpeg') }}') center/cover no-repeat;
     overflow: hidden;
 }
 
@@ -609,26 +609,19 @@ select.sf-input {
    ============================================================ */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-}
-
-.gallery-grid .prop-card-wrap:nth-child(1) {
-    grid-column: span 2;
-    grid-row: span 2;
-}
-
-.gallery-grid .prop-card-wrap:nth-child(1) .prop-img-wrap {
-    height: 380px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }
 
 @media(max-width:992px) {
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
 
-    .gallery-grid .prop-card-wrap:nth-child(1) {
-        grid-column: span 2;
+@media(max-width:576px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1311,13 +1304,13 @@ select.sf-input {
         </div>
 
         <div class="gallery-grid">
-            @foreach($latestProperties->where('status','for_sale')->take(5) as $property)
+            @foreach($forSaleProperties as $property)
             <div class="prop-card-wrap">
                 <a href="{{ route('properties.show', $property->id) }}" class="text-decoration-none d-block h-100">
                     <div class="prop-card">
                         <div class="prop-img-wrap">
-                            <img src="{{ $property->cover_image ?? ($property->images->first()->image_path ?? 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80') }}"
-                                alt="{{ $property->address }}" loading="lazy">
+                            <img src="/storage/{{ $property->cover_image ?? ($property->images->first()->image_path ?? 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80') }}"
+                                alt="{{ $property->title }}" loading="lazy">
                             <span class="prop-status-badge badge-sale">À vendre</span>
                             <span class="prop-type-chip">{{ $property->type->label() }}</span>
                         </div>
@@ -1399,8 +1392,7 @@ select.sf-input {
         </div>
 
         <div class="row g-3">
-            @php $soldProps = $latestProperties->where('status','sold')->take(8); @endphp
-            @forelse($soldProps as $property)
+            @forelse($soldProperties as $property)
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <a href="{{ route('properties.show', $property->id) }}" class="text-decoration-none d-block h-100">
                     <div class="sold-card">
@@ -1430,7 +1422,7 @@ select.sf-input {
                     <div class="sold-overlay"></div>
                     <div class="sold-card-info">
                         <span class="sold-label"><i class="bi bi-check-lg me-1"></i>Vendu</span>
-                        <div class="prop-price mt-2">—</div>
+                        <div class="prop-price mt-2">|</div>
                         <div class="prop-title" style="color:rgba(255,255,255,.6)">À venir</div>
                     </div>
                 </div>

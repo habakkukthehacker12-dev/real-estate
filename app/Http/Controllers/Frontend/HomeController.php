@@ -15,10 +15,18 @@ class HomeController extends Controller
             ->where('is_published', true)
             ->with('images')
             ->latest()
+            ->take(12)
+            ->get();
+
+        $forSaleProperties = Property::where('is_published', true)
+            ->where('status', 'for_sale')
+            ->with('images')
+            ->latest()
             ->take(6)
             ->get();
 
-        $latestProperties = Property::where('is_published', true)
+        $soldProperties = Property::where('is_published', true)
+            ->where('status', 'sold')
             ->with('images')
             ->latest()
             ->take(8)
@@ -32,6 +40,6 @@ class HomeController extends Controller
 
         $types = PropertyType::cases();
 
-        return view('frontend.home', compact('featuredProperties', 'latestProperties', 'topAgents', 'types'));
+        return view('frontend.home', compact('featuredProperties', 'soldProperties', 'forSaleProperties','topAgents', 'types'));
     }
 }

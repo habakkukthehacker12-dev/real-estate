@@ -439,33 +439,6 @@ a.info-value {
     animation: pulse 1.5s infinite;
 }
 
-/* Social links */
-.social-links {
-    display: flex;
-    gap: .6rem;
-    margin-top: 1rem;
-}
-
-.social-link {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    border: 1.5px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: .95rem;
-    text-decoration: none;
-    transition: all .2s;
-}
-
-.social-link:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-}
-
 /* Map section */
 .map-section {
     border-radius: 16px;

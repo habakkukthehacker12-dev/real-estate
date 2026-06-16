@@ -76,7 +76,7 @@ class PropertyController extends Controller
         $hasActiveRent = false;
 
         if (Auth::check() && Auth::user()->isBuyer()) {
-            $hasActiveRent = \App\Models\Rent::where('property_id', $property->id)
+            $hasActiveRent = Rent::where('property_id', $property->id)
                 ->where('applicant_id', Auth::id())
                 ->whereIn('status', ['pending', 'under_review', 'approved'])
                 ->exists();
